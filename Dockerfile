@@ -1,5 +1,7 @@
 FROM debian:10.6
 
+ADD entrypoint.sh
+
 RUN apt-get clean \
 	&& apt-get update -y \
 	&& apt-get upgrade -y \
