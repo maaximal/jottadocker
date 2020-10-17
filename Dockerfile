@@ -16,4 +16,4 @@ RUN apt-get clean \
 	&& chmod +x entrypoint.sh
 
 ENTRYPOINT [ "entrypoint.sh" ]
-CMD ["stdout"]
+CMD ["stdoutlog"]
