@@ -1,6 +1,6 @@
 FROM debian:10.6
 
-ADD entrypoint.sh
+ADD entrypoint.sh entrypoint.sh
 
 RUN apt-get clean \
 	&& apt-get update -y \
@@ -12,6 +12,7 @@ RUN apt-get clean \
 	&& apt-get install jotta-cli -y \
 	&& apt-get autoremove -y \
 	&& apt-get clean \
-	&& rm -rf /var/lib/lists/*
+	&& rm -rf /var/lib/lists/* \
+	&& chmod +x entrypoint.sh
 
 ENTRYPOINT [ "./entrypoint.sh" ]
