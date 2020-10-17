@@ -1,7 +1,7 @@
 FROM debian:10.6
 
 COPY entrypoint.sh /usr/local/bin/
-RUN chmod +x entrypoint.sh \
+RUN chmod +x /usr/local/bin/entrypoint.sh \
 	&& ln -s /usr/local/bin/entrypoint.sh /
 
 RUN apt-get clean \
