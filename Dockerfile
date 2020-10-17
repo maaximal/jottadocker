@@ -15,4 +15,5 @@ RUN apt-get clean \
 	&& rm -rf /var/lib/lists/* \
 	&& chmod +x entrypoint.sh
 
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT [ "entrypoint.sh" ]
+CMD ["stdout"]
