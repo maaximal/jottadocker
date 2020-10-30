@@ -2,6 +2,6 @@
 set -e
 
 apt-get update
-apt-get upgrade
+apt-get upgrade -y
 #jotta-cli ignores set '/root/ignorelist'
 jottad $@
