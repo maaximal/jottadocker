@@ -1,4 +1,4 @@
-FROM debian:10.6
+FROM debian:10.6-slim
 
 ENV JOTTA_TOKEN=**None** \
     JOTTA_DEVICE=**None** \
@@ -11,8 +11,7 @@ COPY entrypoint.sh /src/
 WORKDIR /src
 RUN chmod +x entrypoint.sh
 
-RUN apt-get clean &&\
-	apt-get update -y &&\
+RUN apt-get update -y &&\
 	apt-get upgrade -y &&\
 	apt-get -y install wget gnupg apt-transport-https ca-certificates expect &&\
 	wget -O - https://repo.jotta.us/public.gpg | apt-key add - &&\
