@@ -23,4 +23,4 @@ RUN apt-get clean &&\
 	apt-get clean &&\
 	rm -rf /var/lib/lists/*
 
-ENTRYPOINT [ "entrypoint.sh" ]
+ENTRYPOINT [ "/src/entrypoint.sh" ]
