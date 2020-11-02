@@ -22,6 +22,6 @@ RUN apt-get update -y &&\
 	apt-get clean &&\
 	rm -rf /var/lib/lists/*
 
-EXPORT 14443
+EXPOSE 14443
 
 ENTRYPOINT [ "/src/entrypoint.sh" ]
