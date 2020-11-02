@@ -5,7 +5,7 @@ ENV JOTTA_TOKEN=**None** \
     JOTTA_SCANINTERVAL=1h\
     PUID=101 \
     PGID=101 \
-    LOCALTIME=/usr/share/zoneinfo/Europe/Amsterdam
+    LOCALTIME=Europe/Amsterdam
 
 COPY entrypoint.sh /src/
 WORKDIR /src
@@ -21,5 +21,7 @@ RUN apt-get update -y &&\
 	apt-get autoremove -y &&\
 	apt-get clean &&\
 	rm -rf /var/lib/lists/*
+
+EXPORT 14443
 
 ENTRYPOINT [ "/src/entrypoint.sh" ]
