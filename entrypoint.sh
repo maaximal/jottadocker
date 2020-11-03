@@ -35,24 +35,31 @@ if [[ "$(jotta-cli status)" =~ ERROR.* ]]; then
   expect eof
   "
 
-# add backup volume
-  jotta-cli add /backup
-
 else
-
   echo "User is logged in"
 
 fi
 
-  # load ignore file
-  if [ -f /config/ignorefile ]; then
-    echo "loading ignore file"
-    jotta-cli ignores set /config/ignorefile
-  fi
+echo "Adding backups"
 
-  # set scan interval
-  echo "Setting scan interval"
-  jotta-cli config set scaninterval $JOTTA_SCANINTERVAL
+for dir in /backup/* ; do
+    if [ -d "${dir}" ]; then
+    	set +e
+  		jotta-cli add /backup/$dir
+    fi
+done
+
+set -e
+
+# load ignore file
+if [ -f /config/ignorefile ]; then
+  echo "loading ignore file"
+  jotta-cli ignores set /config/ignorefile
+fi
+
+# set scan interval
+echo "Setting scan interval"
+jotta-cli config set scaninterval $JOTTA_SCANINTERVAL
 
 jotta-cli tail &
 
