@@ -2,6 +2,7 @@
 In order to persist the config add /var/lib/jottad as a mount or volume.
 
 Add paths to backup as mounts under /backup/...
+Each subfolder there is added as a backup path in jotta-cli
 
 Login using env variables:
 - JOTTA_TOKEN: Your JottaCloud personal login token
