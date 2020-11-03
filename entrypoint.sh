@@ -54,7 +54,11 @@ fi
   echo "Setting scan interval"
   jotta-cli config set scaninterval $JOTTA_SCANINTERVAL
 
-# put tail in the foreground, so docker does not quit
-tail -f /dev/null
+jotta-cli tail &
 
-exec "$@"
+cliout="OK"
+while [[ $cliout == "OK" ]]
+do
+	cliout=$(jotta-cli status | tail -1)
+done
+exit 1
