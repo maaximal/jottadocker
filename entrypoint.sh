@@ -59,6 +59,7 @@ jotta-cli tail &
 cliout="OK"
 while [[ $cliout == "OK" ]]
 do
+	sleep 15
 	cliout=$(jotta-cli status | tail -1)
 done
 exit 1
