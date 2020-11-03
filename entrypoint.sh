@@ -13,6 +13,9 @@ usermod -u $PUID jottad
 usermod --gid $PGID jottad
 usermod -a -G jottad jottad
 
+sed -i 's+user="jottad"+user="'$JOTTAD_USER'"+g' /etc/init.d/jottad
+sed -i 's+user="jottad"+group="'$JOTTAD_GROUP'"+g' /etc/init.d/jottad
+
 chown jottad /var/lib/jottad -R
 
 # start the service
