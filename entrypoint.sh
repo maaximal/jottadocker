@@ -13,6 +13,8 @@ usermod -u $PUID jottad
 usermod --gid $PGID jottad
 usermod -a -G jottad jottad
 
+chown jottad /var/lib/jottad -R
+
 # start the service
 /etc/init.d/jottad start
 
