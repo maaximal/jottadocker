@@ -6,7 +6,11 @@ rm /etc/localtime
 ln -s /usr/share/zoneinfo/$LOCALTIME /etc/localtime
 
 # make sure we are running the latest version of jotta-cli
+apt-get update
 apt-get install jotta-cli
+apt-get autoremove -y
+apt-get clean
+rm -rf /var/lib/lists/*
 
 # set the jottad user and group id
 usermod -u $PUID jottad
