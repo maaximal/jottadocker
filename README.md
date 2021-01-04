@@ -1,4 +1,7 @@
 # jottadocker
+
+Available on docker hub as: [mxml/jottadocker](https://hub.docker.com/r/mxml/jottadocker)
+
 In order to persist the config add /var/lib/jottad as a mount or volume.
 
 Add paths to backup as mounts under /backup/...
