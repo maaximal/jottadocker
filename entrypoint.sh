@@ -28,22 +28,37 @@ chown jottad /var/lib/jottad -R
 # wait for service to fully start
 sleep 5
 
-if [[ "$(jotta-cli status)" =~ ERROR.* ]]; then
+# Exit on error no longer needed. Also, it would prevent detecting jotta-cli status
+set +e
 
-  echo "First time login"
+# Checking if jotta runs correctly
+jotta-cli status >/dev/null 2>&1
+R=$?
 
-  # Login user
-  /usr/bin/expect -c "
-  set timeout 20
-  spawn jotta-cli login
-  expect \"accept license (yes/no): \" {send \"yes\n\"}
-  expect \"Personal login token: \" {send \"$JOTTA_TOKEN\n\"}
-  expect \"Devicename*: \" {send \"$JOTTA_DEVICE\n\"}
-  expect eof
-  "
+if [ $R -ne 0 ]; then
+  echo "Could not start jotta. Checking why."
+
+  # Assuming we are not logged in
+  if [[ "$(jotta-cli status 2>&1)" =~ "Not logged in" ]]; then
+    echo "First time login. Logging in."
+
+    # Login user
+    /usr/bin/expect -c "
+    set timeout 20
+    spawn jotta-cli login
+    expect \"accept license (yes/no): \" {send \"yes\n\"}
+    expect \"Personal login token: \" {send \"$JOTTA_TOKEN\n\"}
+    expect \"Devicename*: \" {send \"$JOTTA_DEVICE\n\"}
+    expect eof
+    "
+  else
+    echo "ERROR: Not able to determine why Jotta cannot start:"
+    jotta-cli status
+    exit 1
+  fi
 
 else
-  echo "User is logged in"
+  echo "Jotta started."
 
 fi
 
@@ -63,10 +78,14 @@ jotta-cli config set scaninterval $JOTTA_SCANINTERVAL
 
 jotta-cli tail &
 
-cliout="OK"
-while [[ $cliout == "OK" ]]
+R=0
+while [[ $R -eq 0 ]]
 do
 	sleep 15
-	cliout=$(jotta-cli status | tail -1)
+	jotta-cli status >/dev/null 2>&1
+        R=$?
 done
+
+echo "Exiting:"
+jotta-cli status
 exit 1
