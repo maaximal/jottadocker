@@ -50,6 +50,7 @@ if [ $R -ne 0 ]; then
     expect \"Personal login token: \" {send \"$JOTTA_TOKEN\n\"}
     expect \"Devicename*: \" {send \"$JOTTA_DEVICE\n\"}
     expect eof
+    # TODO: Jotta may return "Found remote device that matches this machine", where a yes/no answer could be given automatically
     "
   else
     echo "ERROR: Not able to determine why Jotta cannot start:"
