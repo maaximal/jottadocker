@@ -39,14 +39,13 @@ if [ $R -ne 0 ]; then
     expect {
     	\"Devicename*: \" {
 		send \"$JOTTA_DEVICE\n\"
-		exp_continue
+		expect eof
 	}
 	\"Do you want to re-use this device? (yes/no):\" {
 		send \"yes\n\"
-		exp_continue
+		expect eof
 	}
     }
-    expect eof
     "
     R=$?
     if [ $R -ne 0 ]; then
