@@ -5,6 +5,10 @@ set -e
 rm /etc/localtime
 ln -s /usr/share/zoneinfo/$LOCALTIME /etc/localtime
 
+# set up config volume
+mkdir -p /config/jottad
+ln -sfn /config/jottad /root/.jottad
+
 # start the service
 export JOTTAD_SYSTEMD=0
 /usr/bin/run_jottad &
