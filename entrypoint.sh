@@ -36,9 +36,11 @@ if [ $R -ne 0 ]; then
     spawn jotta-cli login
     expect \"accept license (yes/no): \" {send \"yes\n\"}
     expect \"Personal login token: \" {send \"$JOTTA_TOKEN\n\"}
-    expect \"Devicename*: \" {send \"$JOTTA_DEVICE\n\"}
+    expect {
+    	\"Devicename*: \": {send \"$JOTTA_DEVICE\n\"}
+	\"Found remote device that matches this machine: \": {send \"yes\n\"}
+    }
     expect eof
-    # TODO: Jotta may return "Found remote device that matches this machine", where a yes/no answer could be given automatically
     "
     R=$?
     if [ $R -ne 0 ]; then
