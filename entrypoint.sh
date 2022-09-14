@@ -38,7 +38,6 @@ if [ $R -ne 0 ]; then
     expect \"Personal login token: \" {send \"$JOTTA_TOKEN\n\"}
     expect {
     	eof {
-            puts stderr \"Login failed\"
             exit 1
         }
     	\"Devicename*: \" {
@@ -51,6 +50,11 @@ if [ $R -ne 0 ]; then
 	}
     }
     "
+    R=$?
+    if [ $R -ne 0 ]; then
+    	echo "Login failed"
+    	exit 1
+    fi
   else
     echo "ERROR: Not able to determine why Jotta cannot start:"
     jotta-cli status
