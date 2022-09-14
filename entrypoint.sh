@@ -5,25 +5,8 @@ set -e
 rm /etc/localtime
 ln -s /usr/share/zoneinfo/$LOCALTIME /etc/localtime
 
-# make sure we are running the latest version of jotta-cli
-apt-get update
-apt-get install jotta-cli
-apt-get autoremove -y
-apt-get clean
-rm -rf /var/lib/lists/*
-
-# set the jottad user and group id
-usermod -u $PUID jottad
-usermod --gid $PGID jottad
-usermod -a -G jottad jottad
-
-sed -i 's+user="jottad"+user="'$JOTTAD_USER'"+g' /etc/init.d/jottad
-sed -i 's+user="jottad"+group="'$JOTTAD_GROUP'"+g' /etc/init.d/jottad
-
-chown jottad /var/lib/jottad -R
-
 # start the service
-/etc/init.d/jottad start
+/usr/bin/run_jottad &
 
 # wait for service to fully start
 sleep 5
