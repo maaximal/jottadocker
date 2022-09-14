@@ -36,6 +36,11 @@ if [ $R -ne 0 ]; then
     expect eof
     # TODO: Jotta may return "Found remote device that matches this machine", where a yes/no answer could be given automatically
     "
+    R=$?
+    if [ $R -ne 0 ]; then
+    	echo "Login failed"
+    	exit 1
+    fi
   else
     echo "ERROR: Not able to determine why Jotta cannot start:"
     jotta-cli status
@@ -44,7 +49,6 @@ if [ $R -ne 0 ]; then
 
 else
   echo "Jotta started."
-
 fi
 
 echo "Adding backups"
