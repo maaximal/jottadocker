@@ -1,4 +1,4 @@
-FROM debian:10.6-slim
+FROM debian:stable-slim
 
 ENV JOTTA_TOKEN=**None** \
     JOTTA_DEVICE=**None** \
