@@ -36,10 +36,7 @@ if [ $R -ne 0 ]; then
     spawn jotta-cli login
     expect \"accept license (yes/no): \" {send \"yes\n\"}
     expect \"Personal login token: \" {send \"$JOTTA_TOKEN\n\"}
-    expect {
-    	\"Devicename*: \": {send \"$JOTTA_DEVICE\n\"}
-	\"Do you want to re-use this device? (yes/no): \": {send \"yes\n\"}
-    }
+    expect \"Do you want to re-use this device?*: \": {send \"yes\n\"}
     expect eof
     "
     R=$?
