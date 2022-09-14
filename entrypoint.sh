@@ -6,6 +6,7 @@ rm /etc/localtime
 ln -s /usr/share/zoneinfo/$LOCALTIME /etc/localtime
 
 # start the service
+export JOTTAD_SYSTEMD=0
 /usr/bin/run_jottad &
 
 # wait for service to fully start
