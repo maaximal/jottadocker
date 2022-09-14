@@ -5,9 +5,7 @@ ENV JOTTA_TOKEN=**None** \
     JOTTA_SCANINTERVAL=1h\
     PUID=101 \
     PGID=101 \
-    LOCALTIME=Europe/Amsterdam \
-    JOTTAD_USER=jottad \
-    JOTTAD_GROUP=jottad
+    LOCALTIME=Europe/Amsterdam 
 
 COPY entrypoint.sh /src/
 WORKDIR /src
