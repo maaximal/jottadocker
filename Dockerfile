@@ -6,7 +6,8 @@ ENV JOTTA_TOKEN=**None** \
     PUID=101 \
     PGID=101 \
     LOCALTIME=Europe/Amsterdam 
-
+    
+VOLUME [ "/config" ]
 COPY entrypoint.sh /src/
 WORKDIR /src
 RUN chmod +x entrypoint.sh
