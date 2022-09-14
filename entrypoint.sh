@@ -38,7 +38,7 @@ if [ $R -ne 0 ]; then
     expect \"Personal login token: \" {send \"$JOTTA_TOKEN\n\"}
     expect {
     	\"Devicename*: \": {send \"$JOTTA_DEVICE\n\"}
-	\"Found remote device that matches this machine: \": {send \"yes\n\"}
+	\"Do you want to re-use this device? (yes/no): \": {send \"yes\n\"}
     }
     expect eof
     "
